@@ -6,13 +6,125 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imgNum8"
+        android:layout_width="77dp"
+        android:layout_height="74dp"
+        android:onClick="inputNumber"
+        app:layout_constraintStart_toEndOf="@+id/imgNum7"
+        app:layout_constraintTop_toBottomOf="@+id/imgNum3"
+        app:srcCompat="@drawable/number8" />
+
+    <ImageView
+        android:id="@+id/imgNum6"
+        android:layout_width="77dp"
+        android:layout_height="74dp"
+        android:onClick="inputNumber"
+        app:layout_constraintStart_toEndOf="@+id/imgNum5"
+        app:layout_constraintTop_toBottomOf="@+id/imgNum1"
+        app:srcCompat="@drawable/number6" />
+
+    <ImageView
+        android:id="@+id/imgNum7"
+        android:layout_width="77dp"
+        android:layout_height="74dp"
+        android:onClick="inputNumber"
+        app:layout_constraintStart_toEndOf="@+id/imgNum6"
+        app:layout_constraintTop_toBottomOf="@+id/imgNum2"
+        app:srcCompat="@drawable/number7" />
+
+    <ImageView
+        android:id="@+id/imgNum9"
+        android:layout_width="77dp"
+        android:layout_height="74dp"
+        android:onClick="inputNumber"
+        app:layout_constraintStart_toEndOf="@+id/imgNum8"
+        app:layout_constraintTop_toBottomOf="@+id/imgNum4"
+        app:srcCompat="@drawable/number9" />
+
+    <ImageView
+        android:id="@+id/imgNum5"
+        android:layout_width="77dp"
+        android:layout_height="74dp"
+        android:onClick="inputNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgNum0"
+        app:srcCompat="@drawable/number5" />
+
+    <ImageView
+        android:id="@+id/imgNum0"
+        android:layout_width="77dp"
+        android:layout_height="74dp"
+        android:onClick="inputNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/number0" />
+
+    <ImageView
+        android:id="@+id/imgNum1"
+        android:layout_width="77dp"
+        android:layout_height="74dp"
+        android:onClick="inputNumber"
+        app:layout_constraintStart_toEndOf="@+id/imgNum0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/number1" />
+
+    <ImageView
+        android:id="@+id/imgNum2"
+        android:layout_width="77dp"
+        android:layout_height="74dp"
+        android:onClick="inputNumber"
+        app:layout_constraintStart_toEndOf="@+id/imgNum1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/number2" />
+
+    <ImageView
+        android:id="@+id/imgNum3"
+        android:layout_width="77dp"
+        android:layout_height="74dp"
+        android:onClick="inputNumber"
+        app:layout_constraintStart_toEndOf="@+id/imgNum2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/number3" />
+
+    <ImageView
+        android:id="@+id/imgNum4"
+        android:layout_width="77dp"
+        android:layout_height="74dp"
+        android:onClick="inputNumber"
+        app:layout_constraintStart_toEndOf="@+id/imgNum3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/number4" />
+
     <TextView
+        android:id="@+id/txtResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgNum7" />
+
+    <TextView
+        android:id="@+id/txtQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgNum7" />
+
+    <View
+        android:id="@+id/successView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
