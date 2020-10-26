@@ -2,7 +2,6 @@ package com.example.a16057851;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private int valA, valB, validAnswer;
     // Define views
     private TextView questionField;
-    private View successView;
+    private SuccessView successView;
     // Define number cap to which answers and number can reach.
     private static int NUMBER_CAP = 9;
 
@@ -25,17 +24,40 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Define question field
-        questionField = findViewById(R.id.txtQuestion);
+        this.questionField = findViewById(R.id.txtQuestion);
         // Define success view
-        successView = findViewById(R.id.successView);
+        this.successView = new SuccessView(this);
         // Generate first question
         this.createQuestion();
     }
 
     /**
+     * Returns valA.
+     * @return int
+     */
+    public int getValA() {
+        return this.valA;
+    }
+
+    /**
+     * Return valB.
+     * @return int
+     */
+    public int getValB() {
+        return this.valB;
+    }
+
+    /**
+     * Return validAnswer.
+     * @return int
+     */
+    public int getValidAnswer() {
+        return this.validAnswer;
+    }
+
+    /**
      * Generates new question.
      */
-    @SuppressLint("DefaultLocale")
     public void createQuestion() {
         // Display pending message
         this.questionField.setText(R.string.loading);
@@ -67,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
      * Parse number from clicked image.
      * @param v View
      */
-    @SuppressLint("SetTextI18n")
     public void inputNumber (View v) {
         // Get output field
         TextView outputField = findViewById(R.id.txtResult);
@@ -75,16 +96,20 @@ public class MainActivity extends AppCompatActivity {
         int num = this.getIntFromImageView((ImageView) v);
         // Compare selected number and valida answer
         boolean result = num == this.validAnswer;
-        // If correct, get next question
+        // If correct, display success screen
         if (result) {
-            outputField.setText(R.string.correct);
-            // Display success screen
-            // this.successView.setVisibility(View.VISIBLE);
-            // Get next question
-            createQuestion();
+            this.successView.displaySuccessView();
         } else { // Else, display incorrect message
             outputField.setText(R.string.incorrect);
         }
+    }
+
+    /**
+     * Close success view and get new question.
+     * @param v View
+     */
+    public void replay(View v) {
+        this.successView.replay();
     }
 
     /**
@@ -97,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         String ivName = getResources().getResourceEntryName(iv.getId());
         // Define regex
         String regex = String.format("[^0-%d]", NUMBER_CAP);
-        // Extract number from
+        // Extract number from name
         int result = Integer.parseInt(ivName.replaceAll(regex, ""));
         // Return number
         return result;
