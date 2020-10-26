@@ -21,7 +21,7 @@ public class SuccessView {
     private MainActivity mainActivity;
     private ConstraintLayout successLayout;
     private ImageView[] starViews;
-    private final MediaPlayer mp;
+    private MediaPlayer mp;
 
     /**
      * Constructor
@@ -35,7 +35,7 @@ public class SuccessView {
         // Define stars displayed on the success screen
         this.starViews = new ImageView[5];
         // Define media player victory sound
-        this.mp = MediaPlayer.create(this.mainActivity, R.raw.victory);
+        this.initVictorySound();
     }
 
     /**
@@ -167,6 +167,12 @@ public class SuccessView {
      * Close success view and get new question.
      */
     public void replay() {
+        // Reset victory sound if still playing
+        if (this.mp.isPlaying()) {
+            this.mp.stop();
+            this.mp.release();
+            this.initVictorySound();
+        }
         // Generate new question
         this.mainActivity.createQuestion();
         // Remove stars
@@ -176,5 +182,12 @@ public class SuccessView {
         }
         // Hide success screen
         this.successLayout.setVisibility(View.INVISIBLE);
+    }
+
+    /**
+     * Initialise the victory sound.
+     */
+    private void initVictorySound() {
+        this.mp = MediaPlayer.create(this.mainActivity, R.raw.victory);
     }
 }
