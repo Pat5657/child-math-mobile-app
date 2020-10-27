@@ -14,14 +14,13 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
-import java.util.Random;
-
 public class SuccessView {
 
     private MainActivity mainActivity;
     private ConstraintLayout successLayout;
     private ImageView[] starViews;
     private MediaPlayer mp;
+    private static int STAR_COUNT = 5;
 
     /**
      * Constructor
@@ -33,7 +32,7 @@ public class SuccessView {
         // Define success layout view
         this.successLayout = this.mainActivity.findViewById(R.id.successLayout);
         // Define stars displayed on the success screen
-        this.starViews = new ImageView[5];
+        this.starViews = new ImageView[STAR_COUNT];
         // Define media player victory sound
         this.initVictorySound();
     }
@@ -55,7 +54,8 @@ public class SuccessView {
             // Add star to list
             this.starViews[i] = star;
         }
-        // Bring replay button and answer field to front
+        // Bring success view widgets to the front
+        this.mainActivity.findViewById(R.id.successLayout).bringToFront();
         this.mainActivity.findViewById(R.id.txtAnswer).bringToFront();
         this.mainActivity.findViewById(R.id.btnReplay).bringToFront();
         // Display success screen
@@ -72,7 +72,7 @@ public class SuccessView {
         // Set star image
         star.setImageResource(R.drawable.star_kids);
         // Set star Id
-        star.setId(this.genViewId());
+        star.setId(this.mainActivity.genViewId());
         int starId = star.getId();
         // Add star to the layout
         this.successLayout.addView(star);
@@ -90,7 +90,7 @@ public class SuccessView {
      */
     private void animateStar(ImageView star) {
         // Define random offset for animation start
-        int offsetStart = this.getRandomNumber(0, 1000);
+        int offsetStart = this.mainActivity.getRandomNumber(0, 1000);
         // Define animation set
         AnimationSet animationSet = new AnimationSet(false);
         animationSet.setStartOffset(offsetStart);
@@ -129,38 +129,10 @@ public class SuccessView {
         // Clone success view
         cSet.clone(this.successLayout);
         // Set constraints
-        cSet.connect(starId, ConstraintSet.TOP, this.successLayout.getId(), ConstraintSet.TOP, this.getRandomNumber(50, 1400));
-        cSet.connect(starId, ConstraintSet.LEFT, this.successLayout.getId(), ConstraintSet.LEFT, this.getRandomNumber(50, 800));
+        cSet.connect(starId, ConstraintSet.TOP, this.successLayout.getId(), ConstraintSet.TOP, this.mainActivity.getRandomNumber(50, 1400));
+        cSet.connect(starId, ConstraintSet.LEFT, this.successLayout.getId(), ConstraintSet.LEFT, this.mainActivity.getRandomNumber(50, 800));
         // Apply constraints
         cSet.applyTo(this.successLayout);
-    }
-
-    /**
-     * Generate a random available view Id.
-     * Since View.generateViewId() is only supported from API 17.
-     * @return int
-     */
-    private int genViewId() {
-        int result;
-        // Generate new valid view id
-        do {
-            result = this.getRandomNumber(1, 256);
-        } while (this.mainActivity.findViewById(result) != null);
-        // Return id
-        return result;
-    }
-
-    /**
-     * Get a random number between a specified range.
-     * @param min int
-     * @param max int
-     * @return int
-     */
-    private int getRandomNumber(int min, int max) {
-        // Define random class
-        Random random = new Random();
-        // Return random number between the range
-        return random.nextInt(max - min) + min;
     }
 
     /**
