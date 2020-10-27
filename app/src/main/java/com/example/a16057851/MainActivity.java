@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private SuccessView successView;
     // Define number cap to which answers and number can reach.
     private static int NUMBER_CAP = 9;
+    private AppleMovable[] movableApples;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,20 @@ public class MainActivity extends AppCompatActivity {
         this.successView = new SuccessView(this);
         // Generate first question
         this.createQuestion();
+        // Initialise apple dragging
+        this.initApples();
+    }
+
+    /**
+     * Initialises each apple image with the dragging feature.
+     */
+    private void initApples() {
+        // Define array of movable apples
+        this.movableApples = new AppleMovable[NUMBER_CAP];
+        // Create apples and add them to list of movable apples
+        for (int i = 0; i < NUMBER_CAP; i++) {
+            this.movableApples[i] = new AppleMovable(this);
+        }
     }
 
     /**
@@ -109,6 +124,14 @@ public class MainActivity extends AppCompatActivity {
      * @param v View
      */
     public void replay(View v) {
+        // Reposition apples
+        for (int i = 0; i < NUMBER_CAP; i++) {
+            // Remove existing apples from view
+            this.movableApples[i].removeView();
+            // Add new apple back on the plate
+            this.movableApples[i] = new AppleMovable(this);
+        }
+        // Reload the
         this.successView.replay();
     }
 
@@ -126,5 +149,33 @@ public class MainActivity extends AppCompatActivity {
         int result = Integer.parseInt(ivName.replaceAll(regex, ""));
         // Return number
         return result;
+    }
+
+    /**
+     * Generate a random available view Id.
+     * Since View.generateViewId() is only supported from API 17.
+     * @return int
+     */
+    public int genViewId() {
+        int result;
+        // Generate new valid view id
+        do {
+            result = this.getRandomNumber(1, 256);
+        } while (this.findViewById(result) != null);
+        // Return id
+        return result;
+    }
+
+    /**
+     * Get a random number between a specified range.
+     * @param min int
+     * @param max int
+     * @return int
+     */
+    public int getRandomNumber(int min, int max) {
+        // Define random class
+        Random random = new Random();
+        // Return random number between the range
+        return random.nextInt(max - min) + min;
     }
 }
