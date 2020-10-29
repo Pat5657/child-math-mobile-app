@@ -5,6 +5,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E3CCCC"
     tools:context=".MainActivity">
 
     <ImageView
@@ -98,20 +99,12 @@
         app:srcCompat="@drawable/number4" />
 
     <TextView
-        android:id="@+id/txtResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgNum7" />
-
-    <TextView
         android:id="@+id/txtQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:textSize="36sp"
+        android:layout_marginTop="12dp"
+        android:textSize="56sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgNum7" />
@@ -120,6 +113,7 @@
         android:id="@+id/imgPlate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#FFFFFF"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtQuestion"
@@ -158,7 +152,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="128dp"
             android:textColor="@color/successText"
-            android:textSize="36sp"
+            android:textSize="56sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/btnReplay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

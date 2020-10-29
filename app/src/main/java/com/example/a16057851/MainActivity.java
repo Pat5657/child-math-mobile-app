@@ -3,7 +3,10 @@ package com.example.a16057851;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -105,8 +108,10 @@ public class MainActivity extends AppCompatActivity {
      * @param v View
      */
     public void inputNumber (View v) {
-        // Get output field
-        TextView outputField = findViewById(R.id.txtResult);
+        // Prevents the buttons from being clicked when not visible.
+        if (this.successView.isVisible()) {
+            return;
+        }
         // Get clicked number
         int num = this.getIntFromImageView((ImageView) v);
         // Compare selected number and valida answer
@@ -114,9 +119,24 @@ public class MainActivity extends AppCompatActivity {
         // If correct, display success screen
         if (result) {
             this.successView.displaySuccessView();
-        } else { // Else, display incorrect message
-            outputField.setText(R.string.incorrect);
+        } else { // Else, handle incorrect answer
+            this.handleWrongAnswer(v);
         }
+    }
+
+    /**
+     * Handle the response for providing an incorrect answer.
+     * @param btnImage View
+     */
+    private void handleWrongAnswer(View btnImage) {
+        // Load shake animation
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.shake);
+        // Shake the clicked button
+        btnImage.startAnimation(animation);
+        // Define vibrate service
+        Vibrator v = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
+        // Vibrate for 0.5 seconds
+        v.vibrate(500);
     }
 
     /**
@@ -131,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             // Add new apple back on the plate
             this.movableApples[i] = new AppleMovable(this);
         }
-        // Reload the
+        // Handle replay button in success screen
         this.successView.replay();
     }
 
