@@ -2,12 +2,8 @@ package com.example.a16057851;
 
 import android.media.MediaPlayer;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.RotateAnimation;
-import android.view.animation.ScaleAnimation;
-import android.view.animation.TranslateAnimation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -89,34 +85,11 @@ public class SuccessView {
      * @param star ImageView
      */
     private void animateStar(ImageView star) {
-        // Define random offset for animation start
-        int offsetStart = this.mainActivity.getRandomNumber(0, 1000);
-        // Define animation set
-        AnimationSet animationSet = new AnimationSet(false);
-        animationSet.setStartOffset(offsetStart);
-        // Add scale animations
-        ScaleAnimation scale = new ScaleAnimation(0, 1, 0, 1);
-        scale.setDuration(5000);
-        scale.setRepeatCount(Animation.INFINITE);
-        animationSet.addAnimation(scale);
-        // Add rotate animation
-        RotateAnimation rotate = new RotateAnimation(0, 360);
-        rotate.setDuration(5000);
-        rotate.setRepeatCount(Animation.INFINITE);
-        animationSet.addAnimation(rotate);
-        // Add translate animation
-        TranslateAnimation trans = new TranslateAnimation(0, 200, 0, 100);
-        trans.setDuration(5000);
-        trans.setRepeatCount(Animation.INFINITE);
-        animationSet.addAnimation(trans);
-        // Add fade out animation
-        AlphaAnimation fadeOut = new AlphaAnimation(1, 0);
-        fadeOut.setStartOffset(2500);
-        fadeOut.setDuration(2500);
-        fadeOut.setRepeatCount(Animation.INFINITE);
-        animationSet.addAnimation(fadeOut);
+        Animation animation = AnimationUtils.loadAnimation(this.mainActivity, R.anim.star);;
+        // Set a random start offset for the animation
+        animation.setStartOffset(this.mainActivity.getRandomNumber(0, 1000));
         // Apply animation set
-        star.startAnimation(animationSet);
+        star.startAnimation(animation);
     }
 
     /**
@@ -161,5 +134,13 @@ public class SuccessView {
      */
     private void initVictorySound() {
         this.mp = MediaPlayer.create(this.mainActivity, R.raw.victory);
+    }
+
+    /**
+     * Checks if the success screen is visible or not.
+     * @return boolean, True if it is, False otherwise.
+     */
+    public boolean isVisible() {
+        return (this.successLayout.getVisibility() == View.VISIBLE);
     }
 }
