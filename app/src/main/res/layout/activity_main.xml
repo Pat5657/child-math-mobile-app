@@ -48,7 +48,10 @@
         android:id="@+id/imgNum5"
         android:layout_width="77dp"
         android:layout_height="74dp"
+        android:layout_marginEnd="308dp"
+        android:layout_marginRight="308dp"
         android:onClick="inputNumber"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgNum0"
         app:srcCompat="@drawable/number5" />
@@ -57,7 +60,10 @@
         android:id="@+id/imgNum0"
         android:layout_width="77dp"
         android:layout_height="74dp"
+        android:layout_marginEnd="308dp"
+        android:layout_marginRight="308dp"
         android:onClick="inputNumber"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/number0" />
